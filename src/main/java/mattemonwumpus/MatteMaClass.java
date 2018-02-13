@@ -12,6 +12,8 @@ package mattemonwumpus;
 public class MatteMaClass {
     public static void main(String[] args) {
         System.out.println("Matte Mon Echo");
+        BoardGenerator board = new BoardGenerator();
+        board.getInstance();
     }
     
 }
