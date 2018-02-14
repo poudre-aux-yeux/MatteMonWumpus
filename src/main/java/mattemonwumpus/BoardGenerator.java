@@ -16,6 +16,14 @@ public class BoardGenerator {
 	 */
 	int[][][] map;
 	
+        public BoardGenerator(){
+            System.out.println("Constructeur vide board generator");
+        }        
+        
+        public BoardGenerator(int[][][] p_map){
+            map = p_map;
+        }
+        
 	public int[][][] getInstance() {
 		if(map != null) {
 			return map;
@@ -25,6 +33,10 @@ public class BoardGenerator {
 		}
 	}
 	
+        public int[][][] getMap(){
+            return map;
+        }
+        
 	private void generateNewMap() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir une longueur :");
@@ -48,7 +60,7 @@ public class BoardGenerator {
 		displayMap();
 	}
 	
-	private ArrayList<Integer> getValues(int x, int y) {
+	public ArrayList<Integer> getValues(int x, int y) {
 		ArrayList<Integer> values = new ArrayList<>();
 		for(int i = 0; i < map[x][y].length; i++) {
 			if(map[x][y][i] > 0) {
@@ -118,10 +130,29 @@ public class BoardGenerator {
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				ArrayList<Integer> values = getValues(x,y);
-				if(values.size() == 0) {
-					System.out.print("[-]");
-				}else {
-					System.out.print(values);
+				if(values.isEmpty()) {
+					System.out.print("\033[36m" + "[-]");
+				}else {                                  
+                                    if(values.contains(3)){
+                                        System.out.print("\033[34m");
+                                    }
+                                    if(values.contains(4)){
+                                        System.out.print("\033[32m");
+                                    }                                   
+                                    if(values.contains(1)){
+                                        System.out.print("\033[31m");
+                                    }
+                                    if(values.contains(2)){
+                                        System.out.print("\033[33m");
+                                    }
+                                     if(values.contains(5)){
+                                        System.out.print("\033[35m");
+                                    }
+                                     if(values.contains(0)){
+                                         System.out.print("\033[38m");
+                                     }
+                                     
+                                    System.out.print(values);
 				}
 			}
 			System.out.println("");
