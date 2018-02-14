@@ -13,8 +13,11 @@ public class MatteMaClass {
 
     public static void main(String[] args) {
         System.out.println("Matte Mon Echo");
-        BoardGenerator board = new BoardGenerator();
-        board.getInstance();
+        BoardGenerator boardGenerator = new BoardGenerator();
+        int[][][] board = boardGenerator.getInstance();
+        
+        System.out.println("yo" + board);
+        //AmonokBouge();
     }
 
 }
