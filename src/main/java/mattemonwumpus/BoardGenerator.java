@@ -19,7 +19,7 @@ public class BoardGenerator {
 	public int[][][] getInstance() {
 		if(map != null) {
 			return map;
-		}else {
+		} else {
 			this.generateNewMap();
 			return map;
 		}
