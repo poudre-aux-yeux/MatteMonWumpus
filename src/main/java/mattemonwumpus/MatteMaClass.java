@@ -13,6 +13,7 @@ public class MatteMaClass {
 
     public static void main(String[] args) {
         System.out.println("Matte Mon Echo");
+
         int[][][] map;
         
         BoardGenerator board = new BoardGenerator();
@@ -20,6 +21,7 @@ public class MatteMaClass {
         map = board.getMap();
         AmonokBouge amonok = new AmonokBouge(map);
         amonok.AmonokStart();
+        
     }
 
 }
