@@ -17,8 +17,8 @@ public class MatteMaClass {
         
         BoardGenerator board = new BoardGenerator();
         map = board.getInstance();
-        AmonokBouge amonok = new AmonokBouge(map);
-        amonok.AmonokStart();
+        //AmonokBouge amonok = new AmonokBouge(map);
+        //amonok.AmonokStart();
 
     }
 
