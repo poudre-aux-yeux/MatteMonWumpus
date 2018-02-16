@@ -16,8 +16,7 @@ public class MatteMaClass {
         int[][][] map;
         
         BoardGenerator board = new BoardGenerator();
-        board.getInstance();
-        map = board.getMap();
+        map = board.getInstance();
         AmonokBouge amonok = new AmonokBouge(map);
         amonok.AmonokStart();
 

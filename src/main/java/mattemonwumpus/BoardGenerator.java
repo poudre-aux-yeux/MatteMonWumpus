@@ -32,10 +32,6 @@ public class BoardGenerator {
 			return map;
 		}
 	}
-	
-        public int[][][] getMap(){
-            return map;
-        }
         
 	private void generateNewMap() {
 		Scanner sc = new Scanner(System.in);
