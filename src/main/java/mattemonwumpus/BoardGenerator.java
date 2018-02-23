@@ -127,28 +127,9 @@ public class BoardGenerator {
 			for(int y = 0; y < map[x].length; y++) {
 				ArrayList<Integer> values = getValues(x,y);
 				if(values.isEmpty()) {
-					System.out.print("\033[36m" + "[-]");
-				}else {                                  
-                                    if(values.contains(3)){
-                                        System.out.print("\033[34m");
-                                    }
-                                    if(values.contains(4)){
-                                        System.out.print("\033[32m");
-                                    }                                   
-                                    if(values.contains(1)){
-                                        System.out.print("\033[31m");
-                                    }
-                                    if(values.contains(2)){
-                                        System.out.print("\033[33m");
-                                    }
-                                     if(values.contains(5)){
-                                        System.out.print("\033[35m");
-                                    }
-                                     if(values.contains(0)){
-                                         System.out.print("\033[38m");
-                                     }
-                                     
-                                    System.out.print(values);
+					System.out.print("[-]");
+				} else {
+					System.out.print(values);
 				}
 			}
 			System.out.println("");
