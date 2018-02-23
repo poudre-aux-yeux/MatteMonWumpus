@@ -15,15 +15,22 @@ public class AmonokBouge {
     
     int[][][] map;
     int[][][] moveAmonok;
-    BoardGenerator board = new BoardGenerator(map);
+    int u_x;
+    int u_y;    
+    BoardGenerator board;
+    BoardGenerator boardAmonok;
     
-        
     public void test () {
         System.out.println("elo");
     }
     
-    public AmonokBouge(int [][][] p_map){
+    public AmonokBouge(int [][][] p_map, int x, int y){
         map = p_map;
+        u_x = x;
+        u_y = y;
+        board = new BoardGenerator(map, u_x, u_y);
+        moveAmonok = new int[board.getU_x()][board.getU_y()][6];
+        boardAmonok = new BoardGenerator(moveAmonok, u_x, u_y);
     }
          
     public void AmonokStart(){
@@ -31,25 +38,29 @@ public class AmonokBouge {
         int result = 99;
         
         while(result != 0){
-            if (result != 3 && result != 4 && result != 34){
-                xy = AmonokRandomMove();        
-            }            
-            if (result == 3){
-                xy = AmonokMove(3);
-            }
-            if (result == 4){
-                xy = AmonokMove(4);
-            }
-            if (result == 34){
-                xy = AmonokMove(34);
-            }
-            result = AmonokResultMove(xy[1], xy[2]);
+//            if (result != 3 && result != 4 && result != 34){
+//                xy = AmonokRandomMove();        
+//            }            
+//            if (result == 3){
+//                xy = AmonokMove(3);
+//            }
+//            if (result == 4){
+//                xy = AmonokMove(4);
+//            }
+//            if (result == 34){
+//                xy = AmonokMove(34);
+//            }
+            xy = AmonokRandomMove();  
+            result = AmonokResultMove(xy[0], xy[1]);
         }                     
                      
     }
     
     private boolean getBool(){
-        int i = new Random().nextInt(10);
+        Random r = new Random();
+        //0 = valeur min, 10 = valeur max
+        int i = 0 + r.nextInt(10 - 0);
+                
         if(i < 4) {
             return true;
         } else {
@@ -62,17 +73,16 @@ public class AmonokBouge {
         int x = 0;
         int y = 0;
         int xy[] = new int [2];
-                
+               
         valueRandom = getBool();
         if(valueRandom == true){
             x += 1;
-            moveAmonok[x][y][0] = 0;
-            xy[1] = x;
         } else{
             y += 1;
-            moveAmonok[x][y][0] = 0;
-            xy[2] = x;
         }
+        xy[0] = x;
+        xy[1] = y;
+        moveAmonok[x][y][0] = 10;
         return xy;
     }
     
@@ -92,13 +102,16 @@ public class AmonokBouge {
             return 0;
         }
           if(values.contains(3)){
+              System.out.println("Vent frais");
             result = 3;
         }
            if(values.contains(4)){
+               System.out.println("Odeur");
             result = 4;
         }
         if (values.contains(3) && values.contains(4)){
-            result = 34;
+            System.out.println("Vent frais + odeur");
+            result = 34; 
         }
             
         for (int i = 0; i < values.size(); i++) {
@@ -131,4 +144,5 @@ public class AmonokBouge {
         
         return xy;
     }
+    
 }

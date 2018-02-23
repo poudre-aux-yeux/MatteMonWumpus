@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class BoardGenerator {
-	
+
 	/**
 	 * 0 = Amonoc
 	 * 1 = Mushu le dragon
@@ -14,23 +14,37 @@ public class BoardGenerator {
 	 * 4 = Odeur d'anu
 	 * 5 = Or
 	 */
-	static int[][][] map;
-	
-	static int[][][] getMap() {
+	int[][][] map;
+        int u_x;
+	int u_y;
+        
+        public BoardGenerator(){
+             System.out.println("Constructeur vide board generator");
+         }        
+         
+         public BoardGenerator(int[][][] p_map, int x, int y){
+             map = p_map;
+             u_x = x;
+             u_y = y;
+         }
+        
+	int[][][] getMap() {
 		if(map != null) {
 			return map;
 		} else {
-			generateNewMap();
+			this.generateNewMap();
 			return map;
 		}
 	}
         
-	private static void generateNewMap() {
+	private void generateNewMap() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir une longueur :");
 		int x = sc.nextInt();
+                u_x = x;
 		System.out.println("Veuillez saisir une largeur :");
 		int y = sc.nextInt();
+                u_y = y;
 		map = new int[x][y][6];
 		// entre 20% et 30% de puits :
 		int nbPit = (int) Math.floor((x*y)*0.2) + (int)(Math.random() * (((x*y)*0.1) + 1));
@@ -48,7 +62,7 @@ public class BoardGenerator {
 		displayMap();
 	}
 	
-	public static ArrayList<Integer> getValues(int x, int y) {
+	public ArrayList<Integer> getValues(int x, int y) {
 		ArrayList<Integer> values = new ArrayList<>();
 		for(int i = 0; i < map[x][y].length; i++) {
 			if(map[x][y][i] > 0) {
@@ -59,7 +73,7 @@ public class BoardGenerator {
 	}
 	
 	
-	private static HashMap<String, Integer> generateNewCoords(int maxXCoord, int maxYCoord){
+	private HashMap<String, Integer> generateNewCoords(int maxXCoord, int maxYCoord){
 		HashMap<String, Integer> newCoords;
 		int xPos = 0 + (int)(Math.random() * (((maxXCoord-1) - 0)));
 		int yPos = 0 + (int)(Math.random() * (((maxYCoord-1) - 0)));
@@ -78,7 +92,7 @@ public class BoardGenerator {
 		return newCoords;
 	}
 	
-	private static void hadMapInformations() {
+	private void hadMapInformations() {
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				ArrayList<Integer> values = getValues(x,y);
@@ -114,7 +128,7 @@ public class BoardGenerator {
 		}
 	}
 	
-	private static void displayMap() {
+	private void displayMap() {
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				ArrayList<Integer> values = getValues(x,y);
@@ -127,5 +141,20 @@ public class BoardGenerator {
 			System.out.println("");
 		}
 	}
-	
+
+     /**
+     * @return the u_x
+     */
+    public int getU_x() {
+        return u_x;
+    }
+
+    /**
+     * @return the u_y
+     */
+    public int getU_y() {
+        return u_y;
+    }
+	       
+        
 }
