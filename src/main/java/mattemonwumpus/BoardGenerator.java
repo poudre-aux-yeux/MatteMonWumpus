@@ -24,8 +24,8 @@ public class BoardGenerator {
          
          public BoardGenerator(int[][][] p_map, int x, int y){
              map = p_map;
-             u_x = x;
              u_y = y;
+             u_x = x;
          }
         
 	int[][][] getMap() {

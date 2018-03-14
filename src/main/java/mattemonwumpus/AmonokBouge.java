@@ -17,6 +17,8 @@ public class AmonokBouge {
     int[][][] moveAmonok;
     int u_x;
     int u_y;    
+    static int x;
+    static int y;
     BoardGenerator board;
     BoardGenerator boardAmonok;
     
@@ -26,34 +28,39 @@ public class AmonokBouge {
     
     public AmonokBouge(int [][][] p_map, int x, int y){
         map = p_map;
-        u_x = x;
-        u_y = y;
+        u_x = y;
+        u_y = x;
         board = new BoardGenerator(map, u_x, u_y);
         moveAmonok = new int[board.getU_x()][board.getU_y()][6];
         boardAmonok = new BoardGenerator(moveAmonok, u_x, u_y);
     }
          
     public void AmonokStart(){
-        int xy[] = new int[2];
+   //     int xy[] = new int[2];
         int result = 99;
         
         while(result != 0){
 //            if (result != 3 && result != 4 && result != 34){
-//                xy = AmonokRandomMove();        
+//                AmonokRandomMove();        
 //            }            
 //            if (result == 3){
-//                xy = AmonokMove(3);
+//                AmonokMove(3);
 //            }
 //            if (result == 4){
-//                xy = AmonokMove(4);
+//                AmonokMove(4);
 //            }
 //            if (result == 34){
-//                xy = AmonokMove(34);
+//                AmonokMove(34);
 //            }
-            xy = AmonokRandomMove();  
-            result = AmonokResultMove(xy[0], xy[1]);
+                AmonokRandomMove(); 
+                System.out.println("x :" + x + " y : " + y);
+//                AmonokRandomMove(); 
+//            }
+            
+            //result = AmonokResultMove(xy[0], xy[1]);
+            result = AmonokResultMove();
         }                     
-                     
+         System.out.println("pt arret");            
     }
     
     private boolean getBool(){
@@ -68,27 +75,60 @@ public class AmonokBouge {
         }
     }
     
-    private int[] AmonokRandomMove(){
+    private void AmonokRandomMove(){
         boolean valueRandom;
-        int x = 0;
-        int y = 0;
-        int xy[] = new int [2];
+        int xTest = x+1;
+        int yTest = y+1;
+ //       int xy[] = new int [2];
                
         valueRandom = getBool();
         if(valueRandom == true){
-            x += 1;
+            if (xTest < u_x){
+                x += 1;
+            }else{
+             if (yTest < u_y)   {
+                y += 1;
+             }
+            }            
         } else{
-            y += 1;
+            if (yTest < u_y){
+                y += 1;                
+            }else{
+             if (xTest < u_x)   {
+                x += 1;
+             }
+            } 
         }
-        xy[0] = x;
-        xy[1] = y;
-        moveAmonok[x][y][0] = 10;
-        return xy;
+   //     xy[0] = x;
+    //    xy[1] = y;
+        moveAmonok[x][y][0] = 1;
+        //return xy;
     }
     
-    private int AmonokResultMove(int x, int y){
+    //private int AmonokResultMove(int x, int y){
+    private int AmonokResultMove(){
         int result = 0;
         ArrayList<Integer> values = board.getValues(x,y);
+        
+        for (int i = 0; i < values.size(); i++) {
+            switch (values.get(i)){
+                case 1:
+                    moveAmonok[x][y][1] = 1;
+                    break;
+                case 2:
+                    moveAmonok[x][y][2] = 1;
+                    break;
+                case 3:
+                    moveAmonok[x][y][3] = 1;
+                    break;
+                case 4:
+                    moveAmonok[x][y][4] = 1;
+                    break;     
+                case 5:
+                    moveAmonok[x][y][5] = 1;
+                    break; 
+            }
+        }
         if(values.contains(1)){
             System.out.println("Vous vous êtes fait dévorer par Mushu le Draaagon !");
             return 0;
@@ -113,36 +153,15 @@ public class AmonokBouge {
             System.out.println("Vent frais + odeur");
             result = 34; 
         }
-            
-        for (int i = 0; i < values.size(); i++) {
-            switch (values.get(i)){
-                case 1:
-                    moveAmonok[x][y][1] = 1;
-                    break;
-                case 2:
-                    moveAmonok[x][y][2] = 2;
-                    break;
-                case 3:
-                    moveAmonok[x][y][3] = 3;
-                    break;
-                case 4:
-                    moveAmonok[x][y][4] = 4;
-                    break;     
-                case 5:
-                    moveAmonok[x][y][5] = 5;
-                    break; 
-            }
-        }
+        
         return result;
     }
     
-    //Gérer les cas de vents, d'odeur
-    private int[] AmonokMove(int v){
-        int xy[] = new int [2];
+    //Gérer les cas de vents, d'odeur, etc.
+    private void AmonokMove(){
         
         
         
-        return xy;
     }
     
 }
